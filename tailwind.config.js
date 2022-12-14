@@ -17,6 +17,9 @@ module.exports = {
         DEFAULT: '1rem',
       },
     },
+    fontFamily: {
+      sans: ['Roboto', 'sans-serif'],
+    },
     colors: {
       green: {
         DEFAULT: '#86C232',
