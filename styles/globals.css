@@ -22,3 +22,15 @@
     font-weight: 700;
     font-display: swap;
 }
+
+
+@layer components {
+    .button-cta {
+        @apply text-xl text-green-dark py-3 px-4 rounded-2xl border-grey-dark text-white border-2;
+        @apply transition bg-grey-light hover:bg-grey-dark hover:text-green;
+    }
+
+    .input-field {
+        @apply text-2xl px-4 py-3 rounded-lg outline-none border-2 border-grey-dark;
+    }
+}
