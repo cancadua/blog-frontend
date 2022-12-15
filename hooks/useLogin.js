@@ -11,8 +11,8 @@ const initialLoginValues = {
 export const useLogin = () => {
   const { setUser } = useContext(UserContext);
 
-  const onSubmit = ({ username, password }) => {
-    singIn(username, password).then(user => {
+  const login = ({ username, password }) => {
+    return singIn(username, password).then(user => {
       setUser(user)
     });
   };
@@ -22,5 +22,5 @@ export const useLogin = () => {
     setUser(null);
   }
 
-  return { onSubmit, initialLoginValues, logOut };
+  return { login, initialLoginValues, logOut };
 };
