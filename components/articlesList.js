@@ -4,7 +4,7 @@ const ArticlesList = ({articles = []}) => {
   return (
     <div className={'flex flex-col gap-16'}>
       {articles.map(article => (
-        <ArticleCard post={article} key={article.id}/>
+        <ArticleCard article={article} key={article.id}/>
       ))}
     </div>
   )

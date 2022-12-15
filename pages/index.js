@@ -12,22 +12,23 @@ const Home = ({ posts }) => {
     <PageLayout>
       <div className={'container flex flex-col justify-center grid grid-cols-12 gap-10'}>
 
-        <div className={'bg-black/30 col-span-9'}>
+        <div className={'col-span-9'}>
           <ArticlesList articles={posts}/>
         </div>
 
-        <div className={'bg-black/30 col-span-3'}>
-          {user?.loggedIn ? (
-            <>
-              <div className={'text-4xl my-16'}>Hello {user.username}</div>
-              <div>
-                Check out your content <Link href={`/user/${user.id}`} className={'text-green underline'}>here</Link>
-              </div>
-            </>
-          ) : (
-            <div className={'text-4xl my-16'}>Hello anonymous user</div>
-          )}
-
+        <div className={'col-span-3'}>
+          <div className={'wrapper'}>
+            {user?.loggedIn ? (
+              <>
+                <div className={'text-xl'}>Hello {user.username}</div>
+                <div>
+                  Check out your content <Link href={`/user/${user.id}`} className={'text-green underline'}>here</Link>
+                </div>
+              </>
+            ) : (
+              <div className={'text-xl'}>Hello anonymous user</div>
+            )}
+          </div>
         </div>
       </div>
     </PageLayout>

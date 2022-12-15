@@ -29,7 +29,7 @@ export const RegisterForm = ({ onClose }) => {
         <Field as={InputField} type={'email'} name={'email'} placeholder={'egzample@email.com'} autoComplete={'on'}/>
         <Field as={InputField} type={'role'} name={'roles'} autoComplete={'on'}/>
         <Field as={InputField} type={'password'} name={'password'} autoComplete={'on'}/>
-        <button className={'button-cta'} type="submit">Login</button>
+        <button className={'button-cta'} type="submit">Register</button>
       </Form>
     </Formik>
   );

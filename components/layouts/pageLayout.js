@@ -5,6 +5,7 @@ const PageLayout = ({ children }) => {
     <div className={'bg-grey min-h-screen'}>
       <Navbar/>
       {children}
+      <div className={'h-12'}/>
     </div>
   );
 };

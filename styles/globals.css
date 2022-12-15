@@ -27,7 +27,11 @@
 @layer components {
     .button-cta {
         @apply text-xl text-green-dark py-3 px-4 rounded-2xl border-grey-dark text-white border-2;
-        @apply transition bg-grey-light hover:bg-grey-dark hover:text-green;
+        @apply transition bg-grey-light hover:bg-grey-dark hover:text-green hover:border-grey-light;
+    }
+
+    .wrapper {
+        @apply bg-grey-dark text-white py-4 px-6 space-y-4 rounded-lg;
     }
 
     .input-field {
