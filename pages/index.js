@@ -1,29 +1,34 @@
-import { LoginForm } from '@/components/forms/loginForm';
 import { useContext } from 'react';
 import { UserContext } from '@/store/user/context';
-import { RegisterForm } from '@/components/forms/registerForm';
 import axios from 'axios';
-import PostCard from '@/components/post-card';
 import PageLayout from '@/components/layouts/pageLayout';
+import Link from 'next/link';
+import ArticlesList from '@/components/articlesList';
 
 const Home = ({ posts }) => {
   const { user } = useContext(UserContext);
 
   return (
     <PageLayout>
-      <div className={'container flex flex-col justify-center'}>
-        {user?.loggedIn && <h1 className={'text-center text-4xl my-16'}>Hello {user.username}</h1>}
+      <div className={'container flex flex-col justify-center grid grid-cols-12 gap-10'}>
 
-        {!user?.loggedIn && <LoginForm/>}
-
-        {!user?.loggedIn && <RegisterForm/>}
-
-        <div className={'bg-black/30'}>
-          {posts.map(post => (
-            <PostCard post={post} key={post.id}/>
-          ))}
+        <div className={'bg-black/30 col-span-9'}>
+          <ArticlesList articles={posts}/>
         </div>
 
+        <div className={'bg-black/30 col-span-3'}>
+          {user?.loggedIn ? (
+            <>
+              <div className={'text-4xl my-16'}>Hello {user.username}</div>
+              <div>
+                Check out your content <Link href={`/user/${user.id}`} className={'text-green underline'}>here</Link>
+              </div>
+            </>
+          ) : (
+            <div className={'text-4xl my-16'}>Hello anonymous user</div>
+          )}
+
+        </div>
       </div>
     </PageLayout>
   );

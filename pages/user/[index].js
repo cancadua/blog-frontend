@@ -1,11 +1,10 @@
 import PageLayout from '@/components/layouts/pageLayout';
 import axios from 'axios';
 
-const ArticlePage = ({ post }) => {
-
+const User = ({ posts }) => {
   return (
     <PageLayout>
-      {console.log(post)}
+      {console.log(posts)}
     </PageLayout>
   );
 };
@@ -13,9 +12,9 @@ const ArticlePage = ({ post }) => {
 export const getServerSideProps = async (context) => {
   const { index } = context.query;
 
-  const post = await axios.get(`/public/posts/${index}`).then(({ data }) => data);
+  const posts = await axios.get(`/public/users/${index}/posts`).then(({ data }) => data);
 
-  return { props: { post: post } };
+  return { props: { posts: posts } };
 };
 
-export default ArticlePage;
+export default User;

@@ -18,16 +18,14 @@ const Navbar = () => {
       <Modal isOpen={modalIsOpen} onClose={() => setModalIsOpen(false)}>
         {modalData}
       </Modal>
-      <nav className={'flex justify-between items-center container py-3'}>
-        <Link href={'/'} legacyBehavior>
-          <a className="text-3xl py-3 text-green font-bold underline">
-            Blog
-          </a>
+      <nav className={'flex justify-between items-center container py-3 mb-16'}>
+        <Link href={'/'} className={'text-3xl py-3 text-green font-bold underline'}>
+          Blog
         </Link>
         {user?.loggedIn ? (
           <button className={'button-cta'} onClick={() => logOut()}>Log out</button>
         ) : (
-          <div>
+          <div className={'flex gap-5'}>
             <button
               className={'button-cta'}
               onClick={() => {

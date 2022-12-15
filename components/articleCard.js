@@ -1,9 +1,9 @@
 import Link from 'next/link';
 
-const PostCard = ({ post }) => {
+const ArticleCard = ({ post }) => {
   return (
     <Link href={`/article/${post.id}`}>
-      <div>
+      <div className={'bg-grey-dark text-white'}>
         <h2>{post.title}</h2>
         <span>{new Date(post.createdAt).toLocaleDateString()}</span>
         <p>
@@ -14,4 +14,4 @@ const PostCard = ({ post }) => {
   );
 };
 
-export default PostCard;
+export default ArticleCard;
