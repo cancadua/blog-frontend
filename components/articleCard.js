@@ -1,24 +1,85 @@
 import Link from 'next/link';
+import CommentsList from '@/components/commentsList';
+import AddCommentForm from '@/components/forms/addCommentForm';
+import clsx from 'clsx';
+import Image from 'next/image';
+import { deleteArticle } from '@/services/deleteArticle';
+import { UserContext } from '@/store/user/context';
+import { useContext, useState } from 'react';
+import EditArticleForm from '@/components/forms/editArticleForm';
 
-const ArticleCard = ({ article }) => {
+const ArticleCard = ({ article, details = false, onAction }) => {
+  const { user } = useContext(UserContext);
+  const [isEditing, setIsEditing] = useState(false);
+
   return (
     <div className={'wrapper'}>
       <div className={'flex justify-between items-end'}>
-        <Link href={`/user/${article.user.id}`} className={'text-green text-xl'}>
+        <span className={'text-green text-xl'}>
           {article.user.username}
-        </Link>
+        </span>
 
-        <span className={'text-green'}>{new Date(article.createdAt).toLocaleDateString()}</span>
+        <div className={'flex'}>
+          <span className={'text-green'}>{new Date(article.createdAt).toLocaleDateString()}</span>
+
+          {!details && article.user.userId === user?.userId && (
+            <div
+              className={'relative w-4 h-5 ml-4 cursor-pointer'}
+              onClick={() => {
+                deleteArticle(article.postId)
+                  .then(() => onAction());
+              }}>
+              <Image src={'/trash.svg'} alt={''} layout={'fill'}/>
+            </div>
+          )}
+
+          {details && article.user.userId === user?.userId && (
+            <p className={'hover:text-green transition cursor-pointer ml-6'} onClick={() => setIsEditing(true)}>
+              Edit
+            </p>
+          )}
+        </div>
+
       </div>
-      <h2 className={'text-3xl'}>{article.title}</h2>
 
-      <p className={'text-xl text-grey-lighter bg-grey/50 p-4'}>
-        {article.content}
-      </p>
+      {isEditing ? (
+        <div className={'flex'}>
+          <EditArticleForm
+            articleId={article.postId}
+            onClose={() => setIsEditing(false)}
+            onAction={() => {
+              onAction();
+              setIsEditing(false);
+            }}
+          />
+        </div>
+      ) : (
+        <>
+          <h2 className={'text-3xl'}>{article.title}</h2>
+          <div className={'p-4 bg-grey/50'}>
+            <p className={clsx('text-xl text-grey-lighter', !details && 'line-clamp-3')}>
+              {article.content}
+            </p>
+          </div>
+        </>
+      )}
 
-      <Link href={`/article/${article.id}`} className={'button-cta block w-fit ml-auto'}>
-        Read more
-      </Link>
+      {details ? (
+        <div>
+          <p className={'text-2xl my-12'}>
+            Comments
+          </p>
+          <CommentsList article={article} onAction={onAction}/>
+          <div className={'mt-8'}>
+            <AddCommentForm articleId={article.postId} onAction={onAction}/>
+          </div>
+        </div>
+      ) : (
+        <Link href={`/article/${article.postId}`} className={'button-cta block w-fit ml-auto '}>
+          Read more
+        </Link>
+      )}
+
     </div>
   );
 };

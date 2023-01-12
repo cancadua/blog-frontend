@@ -1,37 +1,33 @@
 import PageLayout from '@/components/layouts/pageLayout';
-import axios from 'axios';
 import ArticlesList from '@/components/articlesList';
 import { useContext } from 'react';
 import { UserContext } from '@/store/user/context';
 import AddArticle from '@/components/addArticle';
+import { useLogin } from '@/hooks/useLogin';
 
-const User = ({ posts }) => {
+const User = () => {
   const { user } = useContext(UserContext);
+  const { userArticles, fetchUserArticles } = useLogin();
 
   return (
     <PageLayout>
       <div className={'container flex flex-col justify-center grid grid-cols-12 gap-10'}>
         <div className={'col-span-9'}>
-          {user?.loggedIn && <AddArticle/>}
-          <ArticlesList articles={posts}/>
-        </div>
+          {user?.loggedIn && <AddArticle onAction={fetchUserArticles}/>}
+          <div className={'mt-12'}>
+            <ArticlesList onAction={fetchUserArticles} articles={userArticles}/>
+          </div>
 
+        </div>
         <div className={'col-span-3'}>
           <div className={'wrapper'}>
-            <div className={'text-xl'}>Hello {user?.username}</div>
+            <div className={'text-xl'}>Username: {user?.username}</div>
+            <div className={'text-xl'}>Email: {user?.email}</div>
           </div>
         </div>
       </div>
     </PageLayout>
   );
-};
-
-export const getServerSideProps = async (context) => {
-  const { index } = context.query;
-
-  const posts = await axios.get(`/public/users/${index}/posts`).then(({ data }) => data);
-
-  return { props: { posts: posts } };
 };
 
 export default User;

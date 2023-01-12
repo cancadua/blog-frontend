@@ -1,21 +1,19 @@
 import PageLayout from '@/components/layouts/pageLayout';
-import axios from 'axios';
+import ArticleCard from '@/components/articleCard';
+import { useArticle } from '@/hooks/useArticle';
 
-const ArticlePage = ({ post }) => {
+const ArticlePage = () => {
+  const { article, fetchArticleData } = useArticle()
 
   return (
     <PageLayout>
-      {console.log(post)}
+      <div className={'container'}>
+        {article && (
+          <ArticleCard article={article} onAction={() => fetchArticleData()} details/>
+        )}
+      </div>
     </PageLayout>
   );
-};
-
-export const getServerSideProps = async (context) => {
-  const { index } = context.query;
-
-  const post = await axios.get(`/public/posts/${index}`).then(({ data }) => data);
-
-  return { props: { post: post } };
 };
 
 export default ArticlePage;

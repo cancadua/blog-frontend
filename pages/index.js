@@ -5,24 +5,22 @@ import PageLayout from '@/components/layouts/pageLayout';
 import Link from 'next/link';
 import ArticlesList from '@/components/articlesList';
 
-const Home = ({ posts }) => {
+const Home = ({ posts = [] }) => {
   const { user } = useContext(UserContext);
 
   return (
     <PageLayout>
       <div className={'container flex flex-col justify-center grid grid-cols-12 gap-10'}>
-
         <div className={'col-span-9'}>
           <ArticlesList articles={posts}/>
         </div>
-
         <div className={'col-span-3'}>
           <div className={'wrapper'}>
             {user?.loggedIn ? (
               <>
                 <div className={'text-xl'}>Hello {user.username}</div>
                 <div>
-                  Check out your content <Link href={`/user/${user.id}`} className={'text-green underline'}>here</Link>
+                  Check out your content <Link href={`/user`} className={'text-green underline'}>here</Link>
                 </div>
               </>
             ) : (
@@ -36,8 +34,7 @@ const Home = ({ posts }) => {
 };
 
 export const getServerSideProps = async () => {
-  const posts = await axios.get('/public/posts').then(({ data }) => data);
-
+  const posts = await axios.get('/public/posts/page=0').then(({ data }) => data);
   return { props: { posts: posts } };
 };
 

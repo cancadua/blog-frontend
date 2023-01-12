@@ -11,8 +11,9 @@ export const singIn = async (username, password) => {
   }).then(({ data }) => {
     setAuthToken(data.token, data.type);
     return {
-      id: data.id,
+      userId: data.userId,
       username: data.username,
+      articles: data.posts,
       email: data.email,
       roles: data.roles,
       loggedIn: true,

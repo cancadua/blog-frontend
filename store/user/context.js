@@ -2,10 +2,11 @@ import React from 'react';
 
 export const UserContext = React.createContext({
   user: {
-    id: '',
+    userId: null,
     username: '',
     email: '',
     banned: false,
+    articles: [],
     roles: [],
     loggedIn: false,
   },
