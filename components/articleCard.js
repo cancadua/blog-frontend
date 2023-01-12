@@ -8,12 +8,13 @@ import { UserContext } from '@/store/user/context';
 import { useContext, useState } from 'react';
 import EditArticleForm from '@/components/forms/editArticleForm';
 
-const ArticleCard = ({ article, details = false, onAction }) => {
+const ArticleCard = ({ article, details = false, onAction = () => null }) => {
   const { user } = useContext(UserContext);
   const [isEditing, setIsEditing] = useState(false);
 
   return (
     <div className={'wrapper'}>
+
       <div className={'flex justify-between items-end'}>
         <span className={'text-green text-xl'}>
           {article.user.username}
@@ -22,7 +23,7 @@ const ArticleCard = ({ article, details = false, onAction }) => {
         <div className={'flex'}>
           <span className={'text-green'}>{new Date(article.createdAt).toLocaleDateString()}</span>
 
-          {!details && article.user.userId === user?.userId && (
+          {(!details && article.user.userId === user?.userId) || user?.roles.includes('ROLE_ADMIN') && (
             <div
               className={'relative w-4 h-5 ml-4 cursor-pointer'}
               onClick={() => {
@@ -33,7 +34,7 @@ const ArticleCard = ({ article, details = false, onAction }) => {
             </div>
           )}
 
-          {details && article.user.userId === user?.userId && (
+          {details && ((article.user.userId === user?.userId) || user?.roles.includes('ROLE_ADMIN')) && (
             <p className={'hover:text-green transition cursor-pointer ml-6'} onClick={() => setIsEditing(true)}>
               Edit
             </p>

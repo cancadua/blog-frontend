@@ -21,7 +21,7 @@ const Comment = ({ comment, article, onAction }) => {
             <>Utworzono {new Date(comment.createdAt).toLocaleDateString()}</>
           )}
 
-          {user?.userId === article.user.userId && (
+          {(user?.userId === article.user.userId || user?.roles.includes('ROLE_ADMIN')) && (
             <>
               <p className={'hover:text-green transition cursor-pointer ml-6'} onClick={() => setIsEditing(true)}>
                 Edit
@@ -54,7 +54,6 @@ const Comment = ({ comment, article, onAction }) => {
           {comment.content}
         </p>
       )}
-
     </li>
   );
 
