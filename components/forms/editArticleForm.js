@@ -2,13 +2,9 @@ import { Field, Form, Formik } from 'formik';
 import InputField from '@/components/forms/inputField';
 import { editArticle } from '@/services/editArticle';
 
-const initialValues = {
-  title: '',
-  content: '',
-};
 
-const EditArticleForm = ({ articleId, onAction, onClose }) => {
 
+const EditArticleForm = ({ initialValues, articleId, onAction, onClose }) => {
   return (
     <Formik
       initialValues={initialValues}

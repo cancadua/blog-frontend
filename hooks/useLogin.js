@@ -33,10 +33,10 @@ export const useLogin = () => {
     setUser(null);
   };
 
-  useEffect(() => {
-    login({ username: 'testuser', password: 'password' }).then(() => {
-    });
-  }, []);
+  // useEffect(() => {
+  //   login({ username: 'testuser', password: 'password' }).then(() => {
+  //   });
+  // }, []);
 
   useEffect(() => {
     fetchUserArticles();

@@ -45,6 +45,10 @@ const ArticleCard = ({ article, details = false, onAction }) => {
       {isEditing ? (
         <div className={'flex'}>
           <EditArticleForm
+            initialValues={{
+              title: article.title,
+              content: article.content,
+            }}
             articleId={article.postId}
             onClose={() => setIsEditing(false)}
             onAction={() => {
