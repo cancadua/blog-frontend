@@ -4,25 +4,32 @@ import axios from 'axios';
 import PageLayout from '@/components/layouts/pageLayout';
 import Link from 'next/link';
 import ArticlesList from '@/components/articlesList';
+import Pagination from '@/components/pagination';
 
 const Home = () => {
   const { user } = useContext(UserContext);
-  const [articles, setArticles] = useState([])
+  const [articles, setArticles] = useState([]);
+  const [numberOfPages, setNumberOfPages] = useState(1);
+  const [activePage, setActivePage] = useState(0);
 
-  const fetchArticles = () => {
-    axios.get('/public/posts/page=0')
-      .then(({ data }) => setArticles(data))
-  }
+  const fetchArticles = (page) => {
+    axios.get(`/public/posts/page=${page}`)
+      .then(({ data, headers }) => {
+        setNumberOfPages(headers['number-of-pages']);
+        setArticles(data);
+      });
+  };
 
   useEffect(() => {
-    fetchArticles()
-  }, [])
+    fetchArticles(activePage);
+  }, [activePage]);
 
   return (
     <PageLayout>
       <div className={'container flex flex-col justify-center flex flex-col-reverse md:grid md:grid-cols-12 gap-10'}>
         <div className={'md:col-span-9'}>
-          <ArticlesList articles={articles} onAction={fetchArticles}/>
+          <ArticlesList articles={articles} onAction={() => fetchArticles(activePage)}/>
+          <Pagination numberOfPages={numberOfPages} onPageChange={setActivePage}/>
         </div>
         <div className={'md:col-span-3'}>
           <div className={'wrapper'}>
