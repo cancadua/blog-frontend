@@ -40,12 +40,12 @@ const Comment = ({ comment, article, onAction }) => {
         </div>
       </div>
       {isEditing ? (
-        <div className={'flex flex-col md:flex-row gap-3 md:gap-0'}>
+        <div className={'flex flex-col md:flex-row md:items-center gap-3 md:gap-0'}>
           <EditCommentForm commentId={comment.commentId} onAction={() => {
             onAction();
             setIsEditing(false);
           }} initialValue={comment.content}/>
-          <button className={'button-cta w-full md:w-auto md:ml-3'} onClick={() => setIsEditing(false)}>
+          <button className={'button-cta w-full md:h-fit md:w-auto md:ml-3'} onClick={() => setIsEditing(false)}>
             Cancel
           </button>
         </div>
