@@ -11,15 +11,15 @@ const User = () => {
 
   return (
     <PageLayout>
-      <div className={'container flex flex-col justify-center grid grid-cols-12 gap-10'}>
-        <div className={'col-span-9'}>
+      <div className={'container flex flex-col justify-center flex flex-col-reverse md:grid md:grid-cols-12 gap-10'}>
+        <div className={'md:col-span-9'}>
           {user?.loggedIn && <AddArticle onAction={fetchUserArticles}/>}
           <div className={'mt-12'}>
             <ArticlesList onAction={fetchUserArticles} articles={userArticles}/>
           </div>
 
         </div>
-        <div className={'col-span-3'}>
+        <div className={'md:col-span-3'}>
           <div className={'wrapper'}>
             <div className={'text-xl'}>Username: {user?.username}</div>
             <div className={'text-xl'}>Email: {user?.email}</div>

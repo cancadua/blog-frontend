@@ -12,9 +12,9 @@ const EditCommentForm = ({ commentId, onAction, initialValue }) => {
 
   return (
     <Formik initialValues={initialValues} onSubmit={({ content }) => editComment(query.index, commentId, content).then(() => onAction())}>
-      <Form className={'flex flex-1'}>
+      <Form className={'flex flex-col md:flex-row items-center gap-3 md:gap-0 flex-1'}>
         <Field className={'input-field flex-1 text-black'} as={'textarea'} name={'content'} autoComplete={'on'}/>
-        <button className={'button-cta ml-3'} type="submit">Add comment</button>
+        <button className={'button-cta w-full md:w-auto md:ml-3'} type="submit">Add comment</button>
       </Form>
     </Formik>
   );

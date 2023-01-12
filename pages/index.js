@@ -10,11 +10,11 @@ const Home = ({ posts = [] }) => {
 
   return (
     <PageLayout>
-      <div className={'container flex flex-col justify-center grid grid-cols-12 gap-10'}>
-        <div className={'col-span-9'}>
+      <div className={'container flex flex-col justify-center flex flex-col-reverse md:grid md:grid-cols-12 gap-10'}>
+        <div className={'md:col-span-9'}>
           <ArticlesList articles={posts}/>
         </div>
-        <div className={'col-span-3'}>
+        <div className={'md:col-span-3'}>
           <div className={'wrapper'}>
             {user?.loggedIn ? (
               <>

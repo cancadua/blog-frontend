@@ -19,10 +19,10 @@ const EditArticleForm = ({ initialValues, articleId, onAction, onClose }) => {
         </div>
 
         <div className={'flex justify-end mt-4'}>
-          <button className={'button-cta min-w-[10rem]'} onClick={onClose}>
+          <button className={'button-cta flex-1 md:flex-none md:min-w-[10rem]'} onClick={onClose}>
             Cancel
           </button>
-          <button className={'button-cta min-w-[10rem]'} type="submit">
+          <button className={'button-cta flex-1 md:flex-none md:min-w-[10rem]'} type="submit">
             Edit
           </button>
         </div>

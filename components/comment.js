@@ -10,10 +10,10 @@ const Comment = ({ comment, article, onAction }) => {
 
   return (
     <li key={comment.commentId} className={'px-3 py-4 bg-grey-light'}>
-      <div className={'flex justify-between mb-4'}>
-            <span className={'text-green text-lg'}>
-              {comment.user.username}
-            </span>
+      <div className={'flex flex-col md:flex-row justify-between mb-4'}>
+        <span className={'text-green text-lg'}>
+          {comment.user.username}
+        </span>
         <div className={'flex gap-3 items-center'}>
           {comment.createdAt !== comment.updatedAt ? (
             <>Edytowano {new Date(comment.updatedAt).toLocaleDateString()}</>
@@ -40,17 +40,17 @@ const Comment = ({ comment, article, onAction }) => {
         </div>
       </div>
       {isEditing ? (
-        <div className={'flex'}>
+        <div className={'flex flex-col md:flex-row gap-3 md:gap-0'}>
           <EditCommentForm commentId={comment.commentId} onAction={() => {
             onAction();
             setIsEditing(false);
           }} initialValue={comment.content}/>
-          <button className={'button-cta ml-3'} onClick={() => setIsEditing(false)}>
+          <button className={'button-cta w-full md:w-auto md:ml-3'} onClick={() => setIsEditing(false)}>
             Cancel
           </button>
         </div>
       ) : (
-        <p className={'text-xl px-3'}>
+        <p className={'text-xl md:px-3'}>
           {comment.content}
         </p>
       )}

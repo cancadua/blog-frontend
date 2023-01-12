@@ -43,7 +43,7 @@ const ArticleCard = ({ article, details = false, onAction }) => {
       </div>
 
       {isEditing ? (
-        <div className={'flex'}>
+        <div className={'md:flex'}>
           <EditArticleForm
             initialValues={{
               title: article.title,
@@ -60,7 +60,7 @@ const ArticleCard = ({ article, details = false, onAction }) => {
       ) : (
         <>
           <h2 className={'text-3xl'}>{article.title}</h2>
-          <div className={'p-4 bg-grey/50'}>
+          <div className={'p-2 md:p-4 bg-grey/50'}>
             <p className={clsx('text-xl text-grey-lighter', !details && 'line-clamp-3')}>
               {article.content}
             </p>

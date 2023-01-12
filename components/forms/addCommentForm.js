@@ -14,7 +14,7 @@ const AddCommentForm = ({ articleId, onAction }) => {
 
   return (
     <Formik initialValues={initialValues} onSubmit={({ content }) => addComment(articleId, content).then(() => onAction())}>
-      <Form className={'flex'}>
+      <Form className={'flex flex-col gap-3 md:gap-0 md:flex-row'}>
         <Field className={'input-field text-black flex-1'} as={'textarea'} name={'content'} autoComplete={'on'}/>
         <button className={'button-cta'} type="submit">Add comment</button>
       </Form>
