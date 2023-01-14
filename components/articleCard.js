@@ -22,8 +22,7 @@ const ArticleCard = ({ article, details = false, onAction = () => null }) => {
 
         <div className={'flex'}>
           <span className={'text-green'}>{new Date(article.createdAt).toLocaleDateString()}</span>
-
-          {(!details && article.user.userId === user?.userId) || user?.roles.includes('ROLE_ADMIN') && (
+          {((!details && article.user.userId === user?.userId) || user?.roles.includes('ROLE_ADMIN')) && (
             <div
               className={'relative w-4 h-5 ml-4 cursor-pointer'}
               onClick={() => {
